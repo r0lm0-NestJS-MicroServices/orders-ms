@@ -24,7 +24,7 @@ export class OrdersController {
     return this.ordersService.findOne(id);
   }
 
-  @MessagePattern('changeOrderStatus')
+  @MessagePattern({ cmd: 'changeOrderStatus' })
   changeOrderStatus(@Payload() changeOrderStatusDto: ChangeOrderStatusDto) {
     return this.ordersService.changeStatus(changeOrderStatusDto)
 

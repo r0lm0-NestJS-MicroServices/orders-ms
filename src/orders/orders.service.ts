@@ -48,7 +48,7 @@ export class OrdersService extends PrismaClient implements OnModuleInit {
   }
 
   async findOne(id: string) {
-    // try {
+
     const order = await this.order.findUnique({
       where: { id },
     });
@@ -60,10 +60,7 @@ export class OrdersService extends PrismaClient implements OnModuleInit {
       });
     }
     return order;
-    // } catch (error) {
-    //   this.logger.error('Error finding order:', error);
-    //   throw error;
-    // }
+
   }
 
   async changeStatus(changeOrderStatusDto: ChangeOrderStatusDto) {
