@@ -5,3 +5,5 @@ export const OrderStatusList = [
     OrderStatus.DELIVERED,
     OrderStatus.CANCELLED,
 ]
+
+export { OrderStatus };
