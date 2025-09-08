@@ -1,0 +1,3 @@
+
+
+export const PRODUCT_MS_SERVICE = 'PRODUCT_MS_SERVICE'
