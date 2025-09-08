@@ -3,7 +3,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { PrismaClient } from '@prisma/client';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { ChangeOrderStatusDto, OrderPaginationDto } from './dto';
-import { NAST_SERVICE, PRODUCT_MS_SERVICE } from 'src/config';
+import { NAST_SERVICE } from 'src/config';
 import { firstValueFrom } from 'rxjs';
 
 
