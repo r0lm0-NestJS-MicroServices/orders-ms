@@ -24,9 +24,9 @@ export class OrdersService extends PrismaClient implements OnModuleInit {
   async create(createOrderDto: CreateOrderDto) {
     try {
       // confirmar los ids de los productos
-      const prodctsIds = createOrderDto.items.map(item => item.productId);
+      const productIds = createOrderDto.items.map(item => item.productId);
       const products: any = await firstValueFrom(
-        this.productClient.send({ cmd: 'validate_product' }, { ids: prodctsIds }));
+        this.productClient.send({ cmd: 'validate_product' }, { ids: productIds }));
       // calcular el total de la orden
 
       const totalAmount = createOrderDto.items.reduce((acc, OrderItem) => {
@@ -116,6 +116,15 @@ export class OrdersService extends PrismaClient implements OnModuleInit {
 
     const order = await this.order.findUnique({
       where: { id },
+      include: {
+        OrderItem: {
+          select: {
+            productId: true,
+            quantity: true,
+            price: true
+          }
+        }
+      }
     });
     if (!order) {
       throw new RpcException({
@@ -124,7 +133,20 @@ export class OrdersService extends PrismaClient implements OnModuleInit {
         error: 'Order not found',
       });
     }
-    return order;
+    const productIds = order.OrderItem.map(orderItem => orderItem.productId);
+    const products: any = await firstValueFrom(
+      this.productClient.send({ cmd: 'validate_product' }, { ids: productIds }));
+
+
+
+
+    return {
+      ...order,
+      OrderItem: order.OrderItem.map(orderItem => ({
+        ...orderItem,
+        name: products.find(product => product.id === orderItem.productId).name
+      }))
+    };
 
   }
 
