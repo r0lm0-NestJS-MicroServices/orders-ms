@@ -3,7 +3,7 @@ import { CreateOrderDto } from './dto/create-order.dto';
 import { PrismaClient } from '@prisma/client';
 import { ClientProxy, RpcException } from '@nestjs/microservices';
 import { ChangeOrderStatusDto, OrderPaginationDto } from './dto';
-import { PRODUCT_MS_SERVICE } from 'src/config';
+import { NAST_SERVICE, PRODUCT_MS_SERVICE } from 'src/config';
 import { firstValueFrom } from 'rxjs';
 
 
@@ -16,7 +16,7 @@ export class OrdersService extends PrismaClient implements OnModuleInit {
   }
 
   constructor(
-    @Inject(PRODUCT_MS_SERVICE) private readonly productClient: ClientProxy,
+    @Inject(NAST_SERVICE) private readonly productClient: ClientProxy,
   ) {
     super();
   }

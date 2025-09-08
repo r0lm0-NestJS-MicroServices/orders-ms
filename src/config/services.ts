@@ -1,3 +1,5 @@
 
 
 export const PRODUCT_MS_SERVICE = 'PRODUCT_MS_SERVICE'
+
+export const NAST_SERVICE = 'NAST_SERVICE'
