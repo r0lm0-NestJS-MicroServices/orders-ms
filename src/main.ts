@@ -10,10 +10,9 @@ async function bootstrap() {
   const logger = new Logger('Orders-MS');
 
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-    transport: Transport.TCP,
+    transport: Transport.NATS,
     options: {
-      // host: '0.0.0.0',
-      port: envs.port,
+      servers: envs.natsServers,
     },
   });
 
